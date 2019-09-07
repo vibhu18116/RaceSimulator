@@ -57,7 +57,7 @@ class RaceTrack{
 			// System.out.println(board[i]);
 		}
 
-		System.out.printf(">>Danger: There are %d, %d, %d Snake, Vultures and Crickets respectively on your track!!\n\n", this.snakeTiles, this.vultureTiles, this.cricketTiles);
+		System.out.printf(">>Danger: Snakes - %d\n\tVultures - %d\n\tCrickets - %d\n  on your track!!\n\n", this.snakeTiles, this.vultureTiles, this.cricketTiles);
 		System.out.printf(">>Danger: Each Snake, Vulture and Cricket can throw you back by %d, %d and %d number of tiles respectively.\n\n", -1*new SnakeTile().move(), -1*new VultureTile().move(), -1*new CricketTile().move());
 		System.out.printf(">>Good News: There are %d number of Trampolines on your Track!\n\n", this.trampolineTiles);
 		System.out.printf(">>Good News: Each trampoline can help you advance by %d number of tiles.\n\n", new TrampolineTile().move());

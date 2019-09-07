@@ -17,24 +17,25 @@ class Race{
 	private int trampolines = 0;
 
 	Race(){
-		System.out.println(prompt + "Enter total number of tiles on the race track (length)");
+		System.out.println(prompt + "Enter total number of tiles on the race track (length) (between 100 and 99999999 (both inclusive))");
 		boolean input = false;
 		int length = 0;
 
 		while (!input){
 			try{
 				length = sc.nextInt();
+				if (length>99999999){
+					System.out.println(prompt + "Too much to handle, try with a smaller number.");
+					continue;
+				}if (length < 100){
+					System.out.println(prompt + "Too less chosen, try with a greater number.");
+					continue;
+				}
 				input = true;
 			}catch(InputMismatchException e){
-				System.out.println("Invalid input. Try again.");
+				System.out.println(prompt + "Invalid input. Try again.");
 				sc.next();
 			}
-		}
-		
-
-		if (length < 100){
-			System.out.println(prompt + "Too less chosen. Assigning default 100 tiles.");
-			length = 100;
 		}
 
 		this.trackLength = length;
@@ -42,8 +43,17 @@ class Race{
 		setUpRaceTrack(this.trackLength);
 
 		System.out.println(prompt + "Enter the player name.");
+		String name = "";
 		sc.nextLine();
-		String name = sc.nextLine();
+
+		while (name.isBlank()){
+			name = sc.nextLine();
+
+			if (name.isBlank()){
+				System.out.println(prompt + "Invalid name. Try again...");
+			}
+		}
+
 		currentPlayer = new Player(name);
 	}
 
@@ -77,7 +87,7 @@ class Race{
 			while (currentTile!=trackLength){
 				int rolled = comp.rollDice();
 				numMoves++;
-				System.out.printf("%s[Roll-%d]: %s rolled %s at Tile-%d. ", prompt, numMoves, currentPlayer.getName(), rolled, currentTile);
+				System.out.printf("%s[Roll-%d]: %s rolled %s at Tile-%d, ", prompt, numMoves, currentPlayer.getName(), rolled, currentTile);
 				if (currentTile == 1){
 					if (rolled!=6 && cagedAtstart){
 						System.out.println("OOPs you need 6 to start.");
