@@ -5,4 +5,16 @@ class Player{
 	Player(String name){
 		this.name = name;
 	}
+
+	String getName(){
+		return this.name;
+	}
+}
+
+
+class Computer{
+
+	public int rollDice(){
+		int numDice = dice.roll();
+	}
 }

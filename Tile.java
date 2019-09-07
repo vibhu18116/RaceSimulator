@@ -10,6 +10,11 @@ abstract class Tile{
 		return this.numTilesToMove;
 	}
 
+	@Override
+	public String toString(){
+		return "" + this.getClass().getName() + " " + this.numTilesToMove;
+	}
+
 }
 
 abstract class SupportingTiles extends Tile{
@@ -32,23 +37,29 @@ abstract class Disastrous extends Tile{
 
 class SnakeTile extends Disastrous{
 
+	private static final int throwBack = RandomNumberGenerator.getANum(1,10);
+
 	SnakeTile(){
-		super(RandomNumberGenerator.getANum(1,10));
+		super(throwBack);
 	}
 
 }
 
 class VultureTile extends Disastrous{
 
+	private static final int throwBack = RandomNumberGenerator.getANum(1,10);
+
 	VultureTile(){
-		super(RandomNumberGenerator.getANum(1,10));
+		super(throwBack);
 	}
 }
 
 class CricketTile extends Disastrous{
 
+	private static final int throwBack = RandomNumberGenerator.getANum(1,10);
+
 	CricketTile(){
-		super(RandomNumberGenerator.getANum(1,10));
+		super(throwBack);
 	}
 
 }
@@ -63,8 +74,9 @@ class WhiteTile extends SupportingTiles{
 
 class TrampolineTile extends SupportingTiles{
 
-	TrampolineTile(){
-		super(RandomNumberGenerator.getANum(1,10));
-	}
+	private static final int moveForward = RandomNumberGenerator.getANum(1,10);
 
+	TrampolineTile(){
+		super(moveForward);
+	}
 }
