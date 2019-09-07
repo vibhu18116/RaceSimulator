@@ -90,6 +90,12 @@ class Race{
 					}
 				}else{
 					currentTile += rolled;
+
+					if (currentTile > trackLength){
+						currentTile = trackLength;
+						System.out.println("landed on Tile " + currentTile);
+						throw new GameWinnerException(currentPlayer.getName() + " won the race in " + numMoves + " rolls!");
+					}
 					System.out.println("landed on Tile " + currentTile);
 				}
 

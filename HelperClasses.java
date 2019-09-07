@@ -69,7 +69,7 @@ class RaceTrack{
 		while (numPos != 0){
 			int pos = RandomNumberGenerator.getANum(1,totalTiles)-1;
 
-			if (pos == 0){
+			if (pos == 0 || pos == toPutTiles){
 				continue;
 			}
 
