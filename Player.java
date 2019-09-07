@@ -14,7 +14,10 @@ class Player{
 
 class Computer{
 
+	private final Dice dice = new Dice();
+
 	public int rollDice(){
 		int numDice = dice.roll();
+		return numDice;
 	}
 }

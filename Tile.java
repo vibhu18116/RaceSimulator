@@ -15,6 +15,9 @@ abstract class Tile{
 		return "" + this.getClass().getName() + " " + this.numTilesToMove;
 	}
 
+
+	abstract void shake();
+
 }
 
 abstract class SupportingTiles extends Tile{
@@ -43,6 +46,11 @@ class SnakeTile extends Disastrous{
 		super(throwBack);
 	}
 
+
+	void shake(){
+		throw new SnakeBiteException("Hiss...! I am a Snake, you go back " + throwBack + " tiles!");
+	}
+
 }
 
 class VultureTile extends Disastrous{
@@ -51,6 +59,10 @@ class VultureTile extends Disastrous{
 
 	VultureTile(){
 		super(throwBack);
+	}
+
+	void shake(){
+		throw new VultureBiteException("Yapping...! I am a Vulture, you go back " + throwBack + " tiles!");
 	}
 }
 
@@ -62,12 +74,20 @@ class CricketTile extends Disastrous{
 		super(throwBack);
 	}
 
+	void shake(){
+		throw new CricketBiteException("Chirp...! I am a Cricket, you go back " + throwBack + " tiles!");
+	}
+
 }
 
 class WhiteTile extends SupportingTiles{
 
 	WhiteTile(){
 		super(0);
+	}
+
+	void shake(){
+		throw new WhiteTileException("I am a white tile!");
 	}
 
 }
@@ -78,5 +98,9 @@ class TrampolineTile extends SupportingTiles{
 
 	TrampolineTile(){
 		super(moveForward);
+	}
+
+	void shake(){
+		throw new TrampolineException("PingPong! I am a Trampoline, you advance" + moveForward + " tiles!");
 	}
 }

@@ -92,4 +92,8 @@ class RaceTrack{
 		}
 
 	}
+
+	Tile getTile(int tileNUM){
+		return board[tileNUM];
+	}
 }
