@@ -3,7 +3,6 @@ import java.util.Random;
 class Dice{
 
 	private final int numFaces;
-	private static RandomNumberGenerator rg = new RandomNumberGenerator();
 
 	Dice(){
 		this.numFaces = 6;
@@ -14,7 +13,6 @@ class Dice{
 	}
 
 	int roll(){
-		return rg.getANum(1,numFaces);
+		return RandomNumberGenerator.getANum(1,numFaces);
 	}
-
 }
