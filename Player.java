@@ -1,4 +1,4 @@
-class Player{
+final class Player{
 
 	private final String name;
 
@@ -12,7 +12,7 @@ class Player{
 }
 
 
-class Computer{
+final class Computer{
 
 	private final Dice dice = new Dice();
 

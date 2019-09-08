@@ -1,6 +1,6 @@
 import java.util.Random;
 
-class RandomNumberGenerator{
+abstract class RandomNumberGenerator{
 
 	private static Random randGen = new Random();
 
@@ -11,7 +11,7 @@ class RandomNumberGenerator{
 	}
 }
 
-class RaceTrack{
+final class RaceTrack{
 
 	private final int totalTiles;
 	private final int toPutTiles;

@@ -1,6 +1,6 @@
 import java.util.Random;
 
-class Dice{
+final class Dice{
 
 	private final int numFaces;
 

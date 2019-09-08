@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-class Race{
+final class Race{
 
 	private final int trackLength;
 	private String prompt = ">>";

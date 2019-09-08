@@ -38,7 +38,7 @@ abstract class Disastrous extends Tile{
 }
 
 
-class SnakeTile extends Disastrous{
+final class SnakeTile extends Disastrous{
 
 	private static final int throwBack = RandomNumberGenerator.getANum(1,10);
 
@@ -46,14 +46,14 @@ class SnakeTile extends Disastrous{
 		super(throwBack);
 	}
 
-
+	@Override
 	void shake(){
 		throw new SnakeBiteException("Hiss...! I am a Snake, you go back " + throwBack + " tiles!");
 	}
 
 }
 
-class VultureTile extends Disastrous{
+final class VultureTile extends Disastrous{
 
 	private static final int throwBack = RandomNumberGenerator.getANum(1,10);
 
@@ -61,12 +61,13 @@ class VultureTile extends Disastrous{
 		super(throwBack);
 	}
 
+	@Override
 	void shake(){
 		throw new VultureBiteException("Yapping...! I am a Vulture, you go back " + throwBack + " tiles!");
 	}
 }
 
-class CricketTile extends Disastrous{
+final class CricketTile extends Disastrous{
 
 	private static final int throwBack = RandomNumberGenerator.getANum(1,10);
 
@@ -74,25 +75,27 @@ class CricketTile extends Disastrous{
 		super(throwBack);
 	}
 
+	@Override
 	void shake(){
 		throw new CricketBiteException("Chirp...! I am a Cricket, you go back " + throwBack + " tiles!");
 	}
 
 }
 
-class WhiteTile extends SupportingTiles{
+final class WhiteTile extends SupportingTiles{
 
 	WhiteTile(){
 		super(0);
 	}
 
+	@Override
 	void shake(){
 		throw new WhiteTileException("I am a white tile!");
 	}
 
 }
 
-class TrampolineTile extends SupportingTiles{
+final class TrampolineTile extends SupportingTiles{
 
 	private static final int moveForward = RandomNumberGenerator.getANum(1,10);
 
@@ -100,6 +103,7 @@ class TrampolineTile extends SupportingTiles{
 		super(moveForward);
 	}
 
+	@Override
 	void shake(){
 		throw new TrampolineException("PingPong! I am a Trampoline, you advance" + moveForward + " tiles!");
 	}
