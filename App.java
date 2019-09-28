@@ -30,7 +30,7 @@ public class App{
 
 		System.out.println("Choose an option.");
 		System.out.println("1) Start a new game.");
-		System.out.println("2) Load and existing game.");
+		System.out.println("2) Load an existing game.");
 		System.out.println("3) Exit");
 
 		Scanner sc = new Scanner(System.in);
