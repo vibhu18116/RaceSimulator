@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.io.*;
 
 abstract class RandomNumberGenerator{
 
@@ -11,7 +12,7 @@ abstract class RandomNumberGenerator{
 	}
 }
 
-final class RaceTrack{
+final class RaceTrack implements Serializable{
 
 	private final int totalTiles;
 	private final int toPutTiles;
@@ -69,7 +70,7 @@ final class RaceTrack{
 		while (numPos != 0){
 			int pos = RandomNumberGenerator.getANum(1,totalTiles)-1;
 
-			if (pos == 0 || pos == toPutTiles){
+			if (pos == 0 || pos == totalTiles-1){
 				continue;
 			}
 

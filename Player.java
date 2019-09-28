@@ -1,4 +1,6 @@
-final class Player{
+import java.io.*;
+
+final class Player implements Serializable{
 
 	private final String name;
 

@@ -1,4 +1,6 @@
-abstract class Tile{
+import java.io.*;
+
+abstract class Tile implements Serializable{
 
 	private final int numTilesToMove;
 
@@ -105,6 +107,6 @@ final class TrampolineTile extends SupportingTiles{
 
 	@Override
 	void shake(){
-		throw new TrampolineException("PingPong! I am a Trampoline, you advance" + moveForward + " tiles!");
+		throw new TrampolineException("PingPong! I am a Trampoline, you advance " + moveForward + " tiles!");
 	}
 }

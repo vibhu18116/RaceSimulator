@@ -41,3 +41,11 @@ class WhiteTileException extends RuntimeException{
 		super(message);
 	}
 }
+
+
+class GameSavedException extends RuntimeException{
+
+	public GameSavedException(String message){
+		super(message);
+	}
+}

@@ -1,20 +1,27 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.io.*;
 
-final class Race{
+final class Race implements Serializable{
 
 	private final int trackLength;
-	private String prompt = ">>";
+	private static transient String prompt = ">>";
 	private static Scanner sc = new Scanner(System.in);
 	private RaceTrack track;
 	private Player currentPlayer;
 	private int currentTile = 1;
 	private int numMoves = 0;
+	private static transient Computer comp = new Computer();
 
 	private int snakeBites = 0;
 	private int vultureBites = 0;
 	private int cricketBites = 0;
 	private int trampolines = 0;
+
+
+	private boolean checkPoint1 = false;
+	private boolean checkPoint2 = false;
+	private boolean checkPoint3 = false;
 
 	Race(){
 		System.out.println(prompt + "Enter total number of tiles on the race track (length) (between 100 and 99999999 (both inclusive))");
@@ -62,7 +69,7 @@ final class Race{
 		track = new RaceTrack(numTiles);
 	}
 
-	void startRace(){
+	void startRace() throws IOException, ClassNotFoundException{
 		System.out.println(prompt + "Starting the game with " + currentPlayer.getName() + " at Tile-1.");
 		System.out.println(prompt + "Control transferred to Computer for rolling the Dice for " + currentPlayer.getName() + ".");
 		System.out.print(prompt + "Hit enter to start the game.");
@@ -73,18 +80,56 @@ final class Race{
 			return;
 		}else{
 			System.out.println(prompt + "Game Started================>");
-			raceTOwin();
+			raceTOwin(true);
 		}
 	}
 
 
-	private void raceTOwin(){
+	private void raceProgress() throws IOException{
 
-		Computer comp = new Computer();
-		boolean cagedAtstart = true;
+		if (currentTile >= trackLength*0.75 && !checkPoint3){
+			checkPoint3 = true;
+			saveGame(3);
+
+		}else if (currentTile >= trackLength*0.5 && !checkPoint2){
+			checkPoint2 = true;
+			saveGame(2);
+
+		}else if (currentTile >= trackLength*0.25 && !checkPoint1){
+			checkPoint1 = true;
+			saveGame(1);
+		}
+	}
+
+
+	private void saveGame(int num) throws IOException{
+		System.out.printf("Checkpoint %d reached. Would you like to save? (Yes/No)\n", num);
+
+		String response = sc.nextLine();
+
+		if (response.equals("Yes")){
+			this.serialize();
+			throw new GameSavedException("Game Saved.");
+		}else{
+			System.out.println("Continuing the race...");
+		}
+
+	}
+
+
+	private void raceTOwin(boolean cagedAtstart) throws IOException{
 
 		try{
 			while (currentTile!=trackLength){
+
+				try{
+					this.raceProgress();
+				}catch(GameSavedException s){
+					System.out.println(s.getMessage());
+					return;
+				}
+				
+
 				int rolled = comp.rollDice();
 				numMoves++;
 				System.out.printf("%s[Roll-%d]: %s rolled %s at Tile-%d, ", prompt, numMoves, currentPlayer.getName(), rolled, currentTile);
@@ -141,8 +186,8 @@ final class Race{
 						boolean max_back = false;
 						boolean max_forward = false;
 
-						if (currentTile<0){
-							currentTile = 0;
+						if (currentTile<1){
+							currentTile = 1;
 							max_back = true;
 						}
 
@@ -153,7 +198,7 @@ final class Race{
 							throw new GameWinnerException(currentPlayer.getName() + " won the race in " + numMoves + " rolls!");
 						}
 
-						if (currentTile == 0){
+						if (currentTile == 1){
 							cagedAtstart = true;
 						}
 
@@ -176,6 +221,24 @@ final class Race{
 			System.out.println("\t\t\t" + "Total Vulture Bites = " + vultureBites);
 			System.out.println("\t\t\t" + "Total Cricket Bites = " + cricketBites);
 			System.out.println("\t\t\t" + "Total trampolines = " + trampolines);
+		}
+
+	}
+
+	public void continueRace() throws IOException{
+		this.raceTOwin(false);
+	}
+
+
+	public void serialize() throws IOException{
+		ObjectOutputStream out = null;
+		String filename = currentPlayer.getName() + ".txt";
+
+		try{
+			out = new ObjectOutputStream(new FileOutputStream(filename));
+			out.writeObject(this);
+		}finally{
+			out.close();
 		}
 
 	}
