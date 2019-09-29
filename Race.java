@@ -12,6 +12,7 @@ final class Race implements Serializable{
 	private int currentTile = 1;
 	private int numMoves = 0;
 	private static transient Computer comp = new Computer();
+	private static final long serialVersionUID = 2;
 
 	private int snakeBites = 0;
 	private int vultureBites = 0;
@@ -216,6 +217,10 @@ final class Race implements Serializable{
 			throw new GameWinnerException(currentPlayer.getName() + " won the race in " + numMoves + " rolls!");
 
 		}catch(GameWinnerException won){
+			File temp = new File(this.currentPlayer.getName() + ".txt");
+			if (temp.exists()){
+				temp.delete();
+			}
 			System.out.println("\t\t\t" + won.getMessage());
 			System.out.println("\t\t\t" + "Total Snake Bites = " + snakeBites);
 			System.out.println("\t\t\t" + "Total Vulture Bites = " + vultureBites);

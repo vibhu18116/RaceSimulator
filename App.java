@@ -38,8 +38,14 @@ public class App{
 		boolean valid = false;
 
 		while (!valid){
-
-			int ans = sc.nextInt();
+			int ans = 0;
+			try{
+				ans = sc.nextInt();
+			}catch(InputMismatchException e){
+				System.out.println("Invalid input. Exiting");
+				break;
+			}
+			
 
 			if (ans == 1){
 				valid = true;
