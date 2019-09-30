@@ -1,4 +1,2 @@
 compile:
-	javac CustomExceptions.java
-	javac HelperClasses.java
-	javac App.java
+	javac -cp .:./junit-4.13-beta-3.jar:./hamcrest-core-1.3.jar *.java
