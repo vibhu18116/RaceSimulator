@@ -65,12 +65,39 @@ final class Race implements Serializable{
 		currentPlayer = new Player(name, this.trackLength);
 	}
 
+	Race(String name, int trackLength){
+		currentPlayer = new Player(name, trackLength);
+		this.trackLength = trackLength;
+		setUpRaceTrack(this.trackLength);
+	}
+
+
+	@Override
+	public boolean equals(Object o){
+
+		if (o!=null && o.getClass() == getClass()){
+			Race r = (Race) o;
+
+			if (this.trackLength == r.trackLength &&
+				this.currentPlayer.getName().equals(r.currentPlayer.getName()) &&
+				this.currentTile == r.currentTile){
+				return true;
+			}
+
+
+		}return false;
+	}
+
 	public int getTrackLength(){
 		return this.trackLength;
 	}
 
 	public int getCurrentTile(){
 		return this.currentTile;
+	}
+
+	public void setCurrentTile(int num){
+		this.currentTile = num;
 	}
 
 	private void setUpRaceTrack(int numTiles){

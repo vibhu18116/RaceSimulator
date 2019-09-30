@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 
 public class App{
 
-	public static void loadSavedGame(String playerName) throws IOException, ClassNotFoundException{
+	public static Race loadSavedGame(String playerName) throws IOException, ClassNotFoundException{
 		ObjectInputStream in = null;
 
 		try{
@@ -13,17 +13,18 @@ public class App{
 
 			if (!file.exists()){
 				System.out.println("No previous game record corresponding to given player found. Exiting...");
-				return;
+				return null;
 			}		
 			in = new ObjectInputStream(new FileInputStream(filename));
 			Race r = (Race) in.readObject();
-			r.continueRace();
+			return r;
 
 		}finally{
 			if (in != null){
 				in.close();
 			}			
 		}
+
 	}
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException{
@@ -57,7 +58,12 @@ public class App{
 				sc.nextLine();
 				String name = sc.nextLine();
 
-				loadSavedGame(name);
+				Race r = loadSavedGame(name);
+
+				if (r!=null){
+					r.continueRace();
+				}
+				
 
 			}else if (ans == 3) return;
 			else{

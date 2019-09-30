@@ -19,6 +19,12 @@ final class Player implements Serializable{
 		this.currentPos = val; 
 	}
 
+	void checkWinner(){
+		if (this.trackLength == this.currentPos){
+			throw new GameWinnerException(this.getName() + " won the race.");
+		}
+	}
+
 }
 
 

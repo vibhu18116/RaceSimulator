@@ -7,7 +7,9 @@ import org.junit.runners.Suite;
 	TestSnakeBite.class,
 	TestCricketBite.class,
 	TestVultureBite.class,
-	TestTrampolineTile.class
+	TestTrampolineTile.class,
+	TestGameWinner.class,
+	TestSerialisation.class
 })
 public class TestSuite { 
 
