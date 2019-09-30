@@ -20,6 +20,7 @@ final class RaceTrack implements Serializable{
 	private final int vultureTiles;
 	private final int cricketTiles;
 	private final int trampolineTiles;
+	private static final long serialVersionUID = 2;
 
 	private final Tile board[];
 

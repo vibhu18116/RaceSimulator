@@ -3,6 +3,7 @@ import java.io.*;
 abstract class Tile implements Serializable{
 
 	private final int numTilesToMove;
+	private static final long serialVersionUID = 2;
 
 	Tile(int num){
 		this.numTilesToMove = num;

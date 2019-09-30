@@ -5,6 +5,7 @@ final class Player implements Serializable{
 	private final String name;
 	private final int trackLength;
 	private int currentPos;
+	private static final long serialVersionUID = 2;
 
 	Player(String name, int l){
 		this.name = name;
