@@ -62,7 +62,15 @@ final class Race implements Serializable{
 			}
 		}
 
-		currentPlayer = new Player(name);
+		currentPlayer = new Player(name, this.trackLength);
+	}
+
+	public int getTrackLength(){
+		return this.trackLength;
+	}
+
+	public int getCurrentTile(){
+		return this.currentTile;
 	}
 
 	private void setUpRaceTrack(int numTiles){
@@ -150,7 +158,7 @@ final class Race implements Serializable{
 					if (currentTile > trackLength){
 						currentTile = trackLength;
 						System.out.println("landed on Tile " + currentTile);
-						throw new GameWinnerException(currentPlayer.getName() + " won the race in " + numMoves + " rolls!");
+						checkWinner(numMoves);
 					}
 					System.out.println("landed on Tile " + currentTile);
 				}
@@ -196,7 +204,7 @@ final class Race implements Serializable{
 							max_forward = true;
 							currentTile = trackLength;
 							System.out.println("\t" + currentPlayer.getName() + " moved to Tile-" + trackLength);
-							throw new GameWinnerException(currentPlayer.getName() + " won the race in " + numMoves + " rolls!");
+							checkWinner(numMoves);
 						}
 
 						if (currentTile == 1){
@@ -214,7 +222,7 @@ final class Race implements Serializable{
 				}
 			}
 
-			throw new GameWinnerException(currentPlayer.getName() + " won the race in " + numMoves + " rolls!");
+			checkWinner(numMoves);
 
 		}catch(GameWinnerException won){
 			File temp = new File(this.currentPlayer.getName() + ".txt");
@@ -228,6 +236,10 @@ final class Race implements Serializable{
 			System.out.println("\t\t\t" + "Total trampolines = " + trampolines);
 		}
 
+	}
+
+	void checkWinner(int numMoves){
+		throw new GameWinnerException(currentPlayer.getName() + " won the race in " + numMoves + " rolls!");
 	}
 
 	public void continueRace() throws IOException{
